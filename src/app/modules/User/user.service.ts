@@ -11,14 +11,7 @@ const GetAllData = async () => {
 
   const total = await prisma.user.count();
 
-  return {
-    meta: {
-      total,
-      page: 1,
-      limit: 10,
-    },
-    data: result,
-  };
+  return { result, total };
 };
 
 export const UserService = {

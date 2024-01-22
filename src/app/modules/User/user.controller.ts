@@ -21,6 +21,7 @@ const GetAllData = async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'user fetched successfully',
+
     data: result,
   });
 };

@@ -3,8 +3,13 @@ export type TErrorSources = {
   message: string;
 }[];
 
-export type TGenericErrorResponse = {
-  statusCode: number;
+// export type TGenericErrorResponse = {
+//   statusCode: number;
+//   message: string;
+//   errorSources: TErrorSources;
+// };
+
+export type IGenericErrorMessage = {
+  path: string | number;
   message: string;
-  errorSources: TErrorSources;
 };
