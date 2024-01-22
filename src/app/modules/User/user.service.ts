@@ -6,6 +6,22 @@ const insertIntoDb = async (data: User): Promise<User> => {
   return result;
 };
 
+const GetAllData = async () => {
+  const result = await prisma.user.findMany();
+
+  const total = await prisma.user.count();
+
+  return {
+    meta: {
+      total,
+      page: 1,
+      limit: 10,
+    },
+    data: result,
+  };
+};
+
 export const UserService = {
   insertIntoDb,
+  GetAllData,
 };

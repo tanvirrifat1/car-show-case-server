@@ -9,7 +9,8 @@ import config from '../../config';
 import { Secret } from 'jsonwebtoken';
 
 const insertIntoDb = async (data: User): Promise<User> => {
-  const hasPass = await bcrypt.hash(data?.password as string, 12);
+  const saltRounds = 12;
+  const hasPass = await bcrypt.hash(data?.password as string, saltRounds);
   data.password = hasPass;
   const result = await prisma.user.create({ data });
   return result;

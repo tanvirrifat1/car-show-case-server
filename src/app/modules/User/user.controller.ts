@@ -14,6 +14,18 @@ const insertIntoDb = async (req: Request, res: Response) => {
   });
 };
 
+const GetAllData = async (req: Request, res: Response) => {
+  const result = await UserService.GetAllData();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'user fetched successfully',
+    data: result,
+  });
+};
+
 export const UserController = {
   insertIntoDb,
+  GetAllData,
 };
