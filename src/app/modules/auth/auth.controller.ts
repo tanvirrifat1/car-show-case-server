@@ -14,7 +14,20 @@ const insertIntoDb = async (req: Request, res: Response) => {
     data: result,
   });
 };
+const LoginUser = async (req: Request, res: Response) => {
+  const result = await AuthService.LoginUser(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User loin successfully',
+    data: {
+      accessToken: result.accessToken,
+    },
+  });
+};
 
 export const AuthController = {
   insertIntoDb,
+  LoginUser,
 };
