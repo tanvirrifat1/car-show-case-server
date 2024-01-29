@@ -70,4 +70,11 @@ const GetAllData = async (
   };
 };
 
-export const CarService = { insertIntoDb, GetAllData };
+const getSingleData = async (id: string) => {
+  const result = await prisma.car.findUnique({
+    where: { id },
+  });
+  return result;
+};
+
+export const CarService = { insertIntoDb, getSingleData, GetAllData };

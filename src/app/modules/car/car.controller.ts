@@ -14,6 +14,16 @@ const insertIntoDb = async (req: Request, res: Response) => {
   });
 };
 
+const getSingleData = async (req: Request, res: Response) => {
+  const result = await CarService.getSingleData(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Cars single data get successfully',
+    data: result,
+  });
+};
+
 const GetAllData = async (req: Request, res: Response) => {
   const filters = pick(req.query, ['searchTerm', 'name', 'price', 'category']);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -31,4 +41,5 @@ const GetAllData = async (req: Request, res: Response) => {
 export const CarController = {
   insertIntoDb,
   GetAllData,
+  getSingleData,
 };
