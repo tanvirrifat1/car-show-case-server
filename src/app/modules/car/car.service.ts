@@ -77,4 +77,17 @@ const getSingleData = async (id: string) => {
   return result;
 };
 
-export const CarService = { insertIntoDb, getSingleData, GetAllData };
+const updateData = async (id: string, payload: Partial<Car>) => {
+  const result = await prisma.car.update({
+    where: { id },
+    data: payload,
+  });
+  return result;
+};
+
+export const CarService = {
+  insertIntoDb,
+  getSingleData,
+  GetAllData,
+  updateData,
+};
