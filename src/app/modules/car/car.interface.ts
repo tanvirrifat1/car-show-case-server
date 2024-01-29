@@ -1,8 +1,8 @@
-export type IServiceFilterRequest = {
+export type ICarFilterRequest = {
   searchTerm?: string;
 };
 
-export const serviceSearchableFields: string[] = [
+export const CarSearchableFields: string[] = [
   'searchTerm',
   'name',
   'price',
@@ -11,7 +11,7 @@ export const serviceSearchableFields: string[] = [
   'category',
 ];
 
-export const serviceFilterableFields: string[] = [
+export const CarFilterableFields: string[] = [
   'searchTerm',
   'id',
   'limit',

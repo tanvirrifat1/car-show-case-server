@@ -18,8 +18,6 @@ const GetAllData = async (req: Request, res: Response) => {
   const filters = pick(req.query, ['searchTerm', 'name', 'price', 'category']);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
 
-  console.log(filters, 'filters');
-  console.log(options, 'options');
   const result = await CarService.GetAllData(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -2,10 +2,7 @@ import { Car, Prisma } from '@prisma/client';
 import prisma from '../../utils/prisma';
 import { IGenericResponse } from '../../interface/common';
 import { paginationHelpers } from '../../interface/paginationHelpers';
-import {
-  IServiceFilterRequest,
-  serviceSearchableFields,
-} from './car.interface';
+import { ICarFilterRequest } from './car.interface';
 import { IPaginationOptions } from '../../interface/pagination';
 
 const insertIntoDb = async (data: Car): Promise<Car> => {
@@ -14,17 +11,18 @@ const insertIntoDb = async (data: Car): Promise<Car> => {
 };
 
 const GetAllData = async (
-  filters: IServiceFilterRequest,
+  filters: ICarFilterRequest,
   options: IPaginationOptions,
 ): Promise<IGenericResponse<Car[]>> => {
-  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
+  const { page, limit, skip } = paginationHelpers.calculatePagination(options);
+
   const { searchTerm, ...filterData } = filters;
 
   const andConditions = [];
 
   if (searchTerm) {
     andConditions.push({
-      OR: serviceSearchableFields.map((field) => ({
+      OR: ['name', 'price', 'details', 'category'].map((field) => ({
         [field]: {
           contains: searchTerm,
           mode: 'insensitive',
@@ -50,16 +48,9 @@ const GetAllData = async (
     where: whereConditions,
     skip,
     take: limit,
-    orderBy:
-      options.sortBy && options.sortOrder
-        ? { [options.sortBy]: options.sortOrder }
-        : {
-            createdAt: 'desc',
-          },
   });
-  const total = await prisma.car.count({
-    where: whereConditions,
-  });
+
+  const total = await prisma.car.count();
 
   return {
     meta: {
