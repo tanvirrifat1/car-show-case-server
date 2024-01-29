@@ -77,10 +77,17 @@ const getSingleData = async (id: string) => {
   return result;
 };
 
-const updateData = async (id: string, payload: Partial<Car>) => {
+const updateData = async (id: string, payload: Partial<Car>): Promise<Car> => {
   const result = await prisma.car.update({
     where: { id },
     data: payload,
+  });
+  return result;
+};
+
+const DeleteData = async (id: string): Promise<Car | null> => {
+  const result = await prisma.car.delete({
+    where: { id },
   });
   return result;
 };
@@ -90,4 +97,5 @@ export const CarService = {
   getSingleData,
   GetAllData,
   updateData,
+  DeleteData,
 };
