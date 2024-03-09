@@ -10,7 +10,7 @@ const GetAllData = async () => {
   const result = await prisma.user.findMany();
 
   const total = await prisma.user.count();
-
+  console.log(total);
   return { result, total };
 };
 
